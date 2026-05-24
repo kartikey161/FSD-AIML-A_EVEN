@@ -1,0 +1,724 @@
+{% load static %}
+{% static "images" as baseUrl%}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ employee.name }} vs {{employee1.name}}</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/cp.css' %}"/>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="http://127.0.0.1:8000/"><font face="Arial" color="white" size="+1">Home</font></a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li> <font face="Arial" color="white" size="+1"><a class="nav-link" href="#"> Hello {{user.first_name}}</a></font></li>
+&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+        <a class="nav-link" href="http://127.0.0.1:8000/admin"><font face="Arial" color="white" size="+1">Data Entry</font></a> </li>
+      </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+	  <li class="nav-item">
+        <a class="nav-link" href="http://127.0.0.1:8000/show1"><font face="Arial" color="white" size="+1">Feedback</font></a> </li>
+      </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+	        <li class="nav-item">
+        <a class="nav-link" href="http://127.0.0.1:8000/compare"><font face="Arial" color="white" size="+1">Compare</font></a> </li>
+      </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+	  {% if user.is_authenticated %}
+
+	  <li class="nav-item">
+        <a class="nav-link" href="accounts/logout"><font face="Arial" color="white" size="+1">Logout</font></a> </li>
+      </li>
+	  {% else %}
+	  <li class="nav-item">
+        <a class="nav-link" href="accounts/register"><font face="Arial" color="white" size="+1">Register</font></a> </li>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="accounts/login"><font face="Arial" color="white" size="+1">Login</font></a> </li>
+      </li>
+	  {% endif %}
+
+
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<!-- On rows -->
+  <br>
+<details>
+<summary class="design"><i class="fa fa-newspaper-o" style="font-size:24px;text-align:center"> Overview</i></summary>
+<table class="table" border="1">
+<thead class="thead-dark" align="center">
+<tr>
+<th scope="col">Overview</th>
+<th scope="col">{{employee.name}}</th>
+<th scope="col">{{employee1.name}}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td scope="row" align="center"><b>On Road Price</b></td>
+<td align="center">Rs. {{employee.price}}</td>
+<td align="center">Rs. {{employee1.price}}</td>
+</tr>
+<tr>
+<td scope="row" align="center">Fuel Type</td>
+<td align="center">{{ keys.Fuel_Type }}</td>
+<td align="center">{{ keys1.Fuel_Type }}</td>
+</tr>
+<tr>
+<td scope="row" align="center">Engine Displacement (cc)</td>
+<td align="center">{{keys.Engine_Displacement}}</td>
+<td align="center">{{keys1.Engine_Displacement}}</td>
+</tr>
+<tr>
+<td scope="row" align="center">Body Type</td>
+<td align="center">{{keys.Body_Type}}</td>
+<td align="center">{{keys1.Body_Type}}</td>
+</tr>
+<tr>
+<td scope="row" align="center">Max. Power(bhp@rpm)</td>
+<td align="center">{{keys.Max_Power}}</td>
+<td align="center">{{keys1.Max_Power}}</td>
+</tr>
+<tr>
+<td scope="row" align="center">Mileage(ARAI)</td>
+<td align="center">{{keys.Mileage}}</td>
+<td align="center">{{keys1.Mileage}}</td>
+</tr>
+<tr>
+<td scope="row" align="center">User Rating</td>
+<td align="center">4.5</td>
+<td align="center">4.5</td>
+</tr>
+<tr>
+<td scope="row" align="center">Safety Score</td>
+<td align="center">-</td>
+<td align="center">81</td>
+</tr>
+<tr>
+<td scope="row" align="center">Boot Space(Litres)</td>
+<td align="center">{{dim.Boot_Space}}</td>
+<td align="center">{{dim1.Boot_Space}}</td>
+</tr>
+<tr>
+<td scope="row" align="center">Fuel Tank Capacity</td>
+<td align="center">{{keys.Tank_Capacity}}</td>
+<td align="center">{{keys1.Tank_Capacity}}</td>
+</tr>
+<tr>
+<td scope="row" align="center">Seating Capacity</td>
+<td align="center">{{keys.Seats}}</td>
+<td align="center">{{keys1.Seats}}</td>
+</tr>
+<tr>
+<td scope="row" align="center">Transmission Types</td>
+<td align="center">{{keys.Transmission_Type}}</td>
+<td align="center">{{keys1.Transmission_Type}}</td>
+</tr>
+<tr>
+<td scope="row" align="center">Offers & Discounts</td>
+<td align="center">1 Offer</td>
+<td align="center">1 Offer</td>
+</tr>
+<tr>
+<td scope="row" align="center">Finance Available(EMI)</td>
+<td align="center">Rs.6,451</td>
+<td align="center">Rs.15,283</td>
+</tr>
+<tr>
+<td scope="row" align="center">Insurance</td>
+<td align="center">Rs.16,233</td>
+<td align="center">Rs.30,478</td>
+</tr>
+<tr>
+<td scope="row" align="center">Service Cost(Avg. of 5 years)</td>
+<td align="center">Rs. {{keys.Service_Cost}}</td>
+<td align="center">Rs. {{keys.Service_Cost}}</td>
+</tr>
+</tbody>
+</table></details><br>
+<details>
+<summary class="design"><i class="fa fa-bar-chart" style="font-size:24px"> Sales</i></summary>
+<table class="table" border="1">
+<thead class="thead-dark" align="center">
+<tr>
+<th scope="col">Sales</th>
+<th scope="col">Maruti Alto 800</th>
+<th scope="col">Maruti Balenon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td scope="row" align="center"><b>Sales units</b></td>
+<td align="center">{{sale.sale}}</td>
+<td align="center">{{sale1.sale}}</td>
+</tr>
+<tr>
+<td scope="row" align="center">Date</td>
+<td align="center">14/03/2016</td>
+<td align="center">11/08/2016</td>
+</tr>
+</tbody>
+</table></details><br>
+<details>
+<summary class="design"><i class="fa fa-graduation-cap" style="font-size:24px"> Key Features</i></summary>
+<table class="table" border="1">
+<thead class="thead-dark" align="center">
+<tr>
+<th scope="col">Key Features</th>
+<th scope="col">{{employee.name}}</th>
+<th scope="col">{{employee1.name}}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td scope="row" align="center"><b>Power Steering</b></td>
+<td align="center">
+{% if  keyf.Power_Steering %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+<td align="center">
+{% if  keyf1.Power_Steering %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+</tr>
+<tr>
+<td scope="row" align="center">Rear Suspension</td>
+<td align="center">
+{% if  keyf.Rear_Suspension %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+<td align="center">
+{% if  keyf1.Rear_Suspension %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+</tr>
+<tr>
+<td scope="row" align="center">Front Suspension</td>
+<td align="center">
+{% if  keyf.Front_Suspension %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+<td align="center">
+{% if  keyf1.Front_Suspension %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+</tr>
+<tr>
+<td scope="row" align="center">Auto Climate Control</td>
+<td align="center">
+{% if  keyf.Auto_climate_Control %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+<td align="center">
+{% if  keyf1.Auto_climate_Control %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+</tr>
+<tr>
+<td scope="row" align="center">Alloy Wheels</td>
+<td align="center">
+{% if  keyf.Alloy_Wheels %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+<td align="center">
+{% if  keyf1.Alloy_Wheel %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+</tr>
+<tr>
+<td scope="row" align="center">Power Windows</td>
+<td align="center">
+{% if  keyf.Power_Windows %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+<td align="center">
+ {% if  keyf1.Power_Windows %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+</tr>
+<tr>
+<td scope="row" align="center">Air Conditioner</td>
+<td align="center">
+{% if  keyf.Air_Conditioner %}
+    True
+{% else %}
+    False
+{% endif %}
+</td>
+<td align="center">
+{% if  keyf1.Air_Conditioner %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+</tr>
+<tr>
+<td scope="row" align="center">Passenger Airbags</td>
+<td align="center">
+{% if  keyf.Passenger_Airbag %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+<td align="center">
+    {% if  keyf1.Passenger_Airbag %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+</tr>
+<tr>
+<td scope="row" align="center">Fog Lights</td>
+<td align="center">
+{% if  keyf.Fog_Lights %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+<td align="center">
+{% if  keyf1.Fog_Lights %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+</tr>
+<tr>
+<td scope="row" align="center">Heater</td>
+<td align="center">
+{% if  keyf.Heater %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+<td align="center">
+{% if  keyf1.Heater %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+</tr>
+<tr>
+<td scope="row" align="center">Adjustable Steering</td>
+<td align="center">
+{% if  keyf.Adjustable_Steering %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+<td align="center">
+{% if  keyf1.Adjustable_steering %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+</tr>
+<tr>
+<td scope="row" align="center">Air Quality</td>
+<td align="center">
+{% if  keyf.Air_Quality %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+<td align="center">
+{% if  keyf1.Air_Quality %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+</tr>
+<tr>
+<td scope="row" align="center">Remote</td>
+<td align="center">
+{% if  keyf.Remote %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+<td align="center">
+{% if  keyf1.Remote %}
+    <span style='font-size:20px;'>&#10003</span>
+{% else %}
+    <span style='font-size:20px;'>&#10005</span>
+{% endif %}
+</td>
+</tr>
+</tbody>
+</table></details><br>
+<details>
+<summary class="design"><i class="fa fa-folder-open" style="font-size:24px"> Key Specifications</i></summary>
+<table class="table" border="1">
+<thead class="thead-dark" align="center">
+<tr>
+<th scope="col">Key Specifications</th>
+<th scope="col">Maruti Alto 800</th>
+<th scope="col">Maruti Balenon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td scope="row" align="center"><b>Mileage (ARAI)</b></td>
+<td align="center">22.05 kmpl</td>
+<td align="center">27.39 kmpl</td>
+</tr>
+<tr>
+<td scope="row" align="center">Max Power (bhp@rpm)</td>
+<td align="center">47.3bhp@6000rpm</td>
+<td align="center">74bhp@4000rpm</td>
+</tr>
+<tr>
+<td scope="row" align="center">Seating Capacity</td>
+<td align="center">5</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td scope="row" align="center">Service Cost</td>
+<td align="center">Rs. 3387</td>
+<td align="center">Rs. 3366</td>
+</tr>
+<tr>
+<td scope="row" align="center">Fuel Tank Capacity(Litres)</td>
+<td align="center">37Litres</td>
+<td align="center">60Litres</td>
+</tr>
+<tr>
+<td scope="row" align="center">Transmission Type</td>
+<td align="center">Automatic</td>
+<td align="center">Manual</td>
+</tr>
+<tr>
+<td scope="row" align="center">Fuel Type</td>
+<td align="center">CNG</td>
+<td align="center">Petrol</td>
+</tr>
+<tr>
+<td scope="row" align="center">Engine Displacement(cc)</td>
+<td align="center">796</td>
+<td align="center">-</td>
+</tr>
+<tr>
+<td scope="row" align="center">Body Type</td>
+<td align="center">Hatchback</td>
+<td align="center">Hatchback</td>
+</tr>
+</tbody>
+</table></details><br>
+<details>
+<summary class="design"><i class="fa fa-gears" style="font-size:24px"> Engine and Transmission</i></summary>
+<table class="table" border="1">
+<thead class="thead-dark" align="center">
+<tr>
+<th scope="col">Engine and Transmission</th>
+<th scope="col">Maruti Alto 800</th>
+<th scope="col">Maruti Balenon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td scope="row" align="center"><b>No. of cylinders</b></td>
+<td align="center">3</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td scope="row" align="center">Turbo Charger</td>
+<td align="center">True</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td scope="row" align="center">Super Charger</td>
+<td align="center">False</td>
+<td align="center">True</td>
+</tr>
+<tr>
+<td scope="row" align="center">Gear box</td>
+<td align="center">5 Speed</td>
+<td align="center">5 Speed</td>
+</tr>
+<tr>
+<td scope="row" align="center">Fuel Tank Capacity(Litres)</td>
+<td align="center">37Litres</td>
+<td align="center">60Litres</td>
+</tr>
+<tr>
+<td scope="row" align="center">Drive Type</td>
+<td align="center">FWD</td>
+<td align="center">FWD</td>
+</tr>
+<tr>
+<td scope="row" align="center">Valve Configuration</td>
+<td align="center">DOHC</td>
+<td align="center">DOHC</td>
+</tr>
+<tr>
+<td scope="row" align="center">Valves Per Cylinder</td>
+<td align="center">4</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td scope="row" align="center">Fuel Supply System</td>
+<td align="center">MPFi</td>
+<td align="center">MPFi</td>
+</tr>
+<tr>
+<td scope="row" align="center">Max Torque (nm@rpm)</td>
+<td align="center">69Nm@3500rpm</td>
+<td align="center">190Nm@2000rpm</td>
+</tr>
+</tbody>
+</table></details><br>
+<details>
+<summary class="design"><i class="fa fa-battery-2" style="font-size:24px"> Fuel and Performance</i></summary>
+<table class="table" border="1">
+<thead class="thead-dark" align="center">
+<tr>
+<th scope="col">Fuel and Performance</th>
+<th scope="col">Maruti Alto 800</th>
+<th scope="col">Maruti Balenon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td scope="row" align="center"><b>Top Speed (Kmph)</b></td>
+<td align="center">140</td>
+<td align="center">170</td>
+</tr>
+<tr>
+<td scope="row" align="center">Turbo Charger</td>
+<td align="center">True</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td scope="row" align="center">Super Charger</td>
+<td align="center">False</td>
+<td align="center">True</td>
+</tr>
+<tr>
+<td scope="row" align="center">Turning Radius (Metres)</td>
+<td align="center">4.6</td>
+<td align="center">4.9</td>
+</tr>
+<tr>
+<td scope="row" align="center">Acceleration (Seconds)</td>
+<td align="center">19</td>
+<td align="center">12.93</td>
+</tr>
+<tr>
+<td scope="row" align="center">Front Brake Type</td>
+<td align="center">Solid disk</td>
+<td align="center">Disk</td>
+</tr>
+<tr>
+<td scope="row" align="center">Rear Brake Type</td>
+<td align="center">Drum</td>
+<td align="center">Drum</td>
+</tr>
+</tbody>
+</table></details><br>
+<details>
+<summary class="design"><i class="fa fa-cubes" style="font-size:24px"> Dimensions & Capacity</i></summary>
+<table class="table" border="1">
+<thead class="thead-dark" align="center">
+<tr>
+<th scope="col">Dimensions & Capacity</th>
+<th scope="col">Maruti Alto 800</th>
+<th scope="col">Maruti Balenon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td scope="row" align="center"><b>Length (mm)</b></td>
+<td align="center">3445</td>
+<td align="center">3995</td>
+</tr>
+<tr>
+<td scope="row" align="center">Width (mm)</td>
+<td align="center">1490</td>
+<td align="center">1745</td>
+</tr>
+<tr>
+<td scope="row" align="center">Height (mm)</td>
+<td align="center">1475</td>
+<td align="center">1510</td>
+</tr>
+<tr>
+<td scope="row" align="center">Boot Space (Litres)</td>
+<td align="center">177</td>
+<td align="center">339</td>
+</tr>
+<tr>
+<td scope="row" align="center">Ground Clearance Unladen (mm)</td>
+<td align="center">160</td>
+<td align="center">170</td>
+</tr>
+<tr>
+<td scope="row" align="center">Wheel Base (mm)</td>
+<td align="center">2360</td>
+<td align="center">2520</td>
+</tr>
+<tr>
+<td scope="row" align="center">Front Tread (mm)</td>
+<td align="center">1295</td>
+<td align="center">1515</td>
+</tr>
+<tr>
+<td scope="row" align="center">Rear Tread (mm)</td>
+<td align="center">1290</td>
+<td align="center">1525</td>
+</tr>
+<tr>
+<td scope="row" align="center">Grossweight (kg)</td>
+<td align="center">1185</td>
+<td align="center">1430</td>
+</tr>
+<tr>
+<td scope="row" align="center">No. of Doors</td>
+<td align="center">5</td>
+<td align="center">5</td>
+</tr>
+</tbody>
+</table></details><br>
+<details>
+<summary class="design"><i class="fa fa-music" style="font-size:24px"> Entertainment & Communication</i></summary>
+<table class="table" border="1">
+<thead class="thead-dark" align="center">
+<tr>
+<th scope="col">Entertainment & Communication</th>
+<th scope="col">Maruti Alto 800</th>
+<th scope="col">Maruti Balenon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td scope="row" align="center"><b>Cd Player</b></td>
+<td align="center">False</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td scope="row" align="center">Cd Changer</td>
+<td align="center">False</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td scope="row" align="center">Dvd Player</td>
+<td align="center">False</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td scope="row" align="center">Radio</td>
+<td align="center">False</td>
+<td align="center">True</td>
+</tr>
+<tr>
+<td scope="row" align="center">No. of Speakers</td>
+<td align="center">-</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td scope="row" align="center">Integrated2DINAudio</td>
+<td align="center">False</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td scope="row" align="center">USB And Auxiliary Input</td>
+<td align="center">False</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td scope="row" align="center">Bluetooth Connectivity</td>
+<td align="center">False</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td scope="row" align="center">Touch Screen</td>
+<td align="center">False</td>
+<td align="center">False</td>
+</tr>
+<tr>
+<td scope="row" align="center">Internal Storage</td>
+<td align="center">False</td>
+<td align="center">False</td>
+</tr>
+</tbody>
+</table>
+</details>
+  <br>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
